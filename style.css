@@ -1,0 +1,348 @@
+/* ==========================================================================
+   CYBER & ELECTRICAL ENGINEERING PORTFOLIO STYLES
+   ========================================================================== */
+
+/* Custom Fonts & Global Resets */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-heading: 'Orbitron', sans-serif;
+
+  /* Theme Colors - Cyber Electric Palette */
+  --electric-cyan: #00f2fe;
+  --electric-blue: #0088ff;
+  --electric-green: #00ffaa;
+  --electric-amber: #f59e0b;
+  --electric-purple: #9d4edd;
+  
+  --bg-dark: #070b14;
+  --bg-card: rgba(13, 22, 40, 0.75);
+  --bg-card-hover: rgba(20, 35, 65, 0.85);
+  --border-glow: rgba(0, 242, 254, 0.25);
+  --border-glow-hover: rgba(0, 242, 254, 0.6);
+}
+
+/* Light Mode Overrides */
+.light-theme {
+  --bg-dark: #f0f4f8;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --border-glow: rgba(0, 136, 255, 0.2);
+  --border-glow-hover: rgba(0, 136, 255, 0.5);
+  color: #0f172a;
+}
+
+.light-theme body {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+.light-theme .nav-glass {
+  background: rgba(241, 245, 249, 0.85);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.light-theme .circuit-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 136, 255, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .text-slate-400 {
+  color: #64748b !important;
+}
+
+.light-theme .text-slate-300 {
+  color: #475569 !important;
+}
+
+.light-theme .text-white {
+  color: #0f172a !important;
+}
+
+.light-theme .bg-slate-900\/60,
+.light-theme .bg-slate-900\/80,
+.light-theme .bg-slate-950 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Base Document Setup */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-main);
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: #e2e8f0;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Interactive Canvas Background */
+#circuit-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.65;
+}
+
+/* Glassmorphism Classes */
+.nav-glass {
+  background: rgba(7, 11, 20, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+}
+
+.circuit-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glow);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.circuit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--electric-cyan), transparent);
+  transition: all 0.6s ease;
+}
+
+.circuit-card:hover {
+  border-color: var(--border-glow-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -8px rgba(0, 242, 254, 0.2);
+}
+
+.circuit-card:hover::before {
+  left: 100%;
+}
+
+/* High-tech Glow Effects */
+.glow-cyan {
+  text-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+}
+
+.glow-box-cyan {
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+}
+
+.glow-box-amber {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+}
+
+.glow-border {
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  box-shadow: inset 0 0 15px rgba(0, 242, 254, 0.15), 0 0 15px rgba(0, 242, 254, 0.2);
+}
+
+/* Typewriter & Monospace Accent */
+.font-tech {
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
+.font-code {
+  font-family: var(--font-mono);
+}
+
+/* Pulsing Status Dot */
+.pulse-dot {
+  position: relative;
+}
+
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background-color: inherit;
+  animation: pingPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  opacity: 0.75;
+}
+
+@keyframes pingPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70%, 100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Oscilloscope & Voltage Waveform Simulation */
+.waveform-container {
+  height: 120px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(4, 9, 18, 0.8);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 242, 254, 0.2);
+}
+
+/* Grid Lines Background for Telemetry Widget */
+.tech-grid-bg {
+  background-size: 30px 30px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 242, 254, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 242, 254, 0.06) 1px, transparent 1px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070b14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 242, 254, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00f2fe;
+}
+
+/* Neon Gradient Buttons */
+.btn-electric {
+  background: linear-gradient(135deg, #0088ff 0%, #00f2fe 100%);
+  color: #050b14;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.btn-electric::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #00f2fe 0%, #00ffaa 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.btn-electric:hover {
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-electric:hover::after {
+  opacity: 1;
+}
+
+.btn-outline-electric {
+  background: transparent;
+  border: 1px solid #00f2fe;
+  color: #00f2fe;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-electric:hover {
+  background: rgba(0, 242, 254, 0.12);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Packet Transmission Animation for Live Logger Widget */
+@keyframes transmitPulse {
+  0% {
+    left: 0%;
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+    box-shadow: 0 0 15px #00f2fe;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+.packet-anim {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #00f2fe;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: transmitPulse 1.2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modal Popup Transition */
+.modal-overlay {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-content {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.modal-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-hidden .modal-content {
+  transform: scale(0.92) translateY(20px);
+}
+
+/* Filter Tag Active State */
+.filter-btn.active {
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(0, 136, 255, 0.2));
+  border-color: #00f2fe;
+  color: #00f2fe;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+}
+
+/* Live Database Table Row Insertion Effect */
+@keyframes rowInsert {
+  0% {
+    background-color: rgba(0, 242, 254, 0.35);
+    transform: translateX(-10px);
+  }
+  100% {
+    background-color: transparent;
+    transform: translateX(0);
+  }
+}
+
+.new-row-flash {
+  animation: rowInsert 1.2s ease-out;
+}
